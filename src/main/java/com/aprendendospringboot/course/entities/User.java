@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import java.util.List;
 import java.util.ArrayList;
 import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_user")
@@ -23,6 +24,7 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
@@ -78,7 +80,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<Order> getOrder() {
+    public List<Order> getOrders() {
         return orders;
     }
 
