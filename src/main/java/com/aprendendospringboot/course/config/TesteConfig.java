@@ -12,6 +12,8 @@ import com.aprendendospringboot.course.entities.User;
 import com.aprendendospringboot.course.entities.Order;
 import com.aprendendospringboot.course.repositories.OrderRepository;
 import com.aprendendospringboot.course.entities.enums.OrderStatus;
+import com.aprendendospringboot.course.repositories.CategoryRepository;
+import com.aprendendospringboot.course.entities.Category;
 
 @Configuration
 @Profile("test")
@@ -23,7 +25,16 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     public void run(String... args) throws Exception {
+
+        Category eletronics = new Category(null, "eletronics");
+        Category foods = new Category(null, "foods");
+        Category computers = new Category(null, "computers");
+
+        categoryRepository.saveAll(Arrays.asList(eletronics, foods, computers));
 
         User trem = new User(null, "trem", "trem@gmail.com", "85997687485", "e7y6ig");
         User tremBala = new User(null, "trem bala", "trembala@gmail.com", "85984393928", "wo8yre");
