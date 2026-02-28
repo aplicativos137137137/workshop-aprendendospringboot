@@ -14,6 +14,8 @@ import com.aprendendospringboot.course.repositories.OrderRepository;
 import com.aprendendospringboot.course.entities.enums.OrderStatus;
 import com.aprendendospringboot.course.repositories.CategoryRepository;
 import com.aprendendospringboot.course.entities.Category;
+import com.aprendendospringboot.course.repositories.ProductRepository;
+import com.aprendendospringboot.course.entities.Product;
 
 @Configuration
 @Profile("test")
@@ -28,13 +30,23 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     public void run(String... args) throws Exception {
 
         Category eletronics = new Category(null, "eletronics");
         Category foods = new Category(null, "foods");
         Category computers = new Category(null, "computers");
 
+        Product sucoDeLaranja = new Product(null, "suco de laranja", "cruel viu", 7.0, "");
+        Product macbook = new Product(null, "macbook", "cruel", 3000.0, "");
+        Product microfone = new Product(null, "microfone", "urra doido", 70.0, "");
+        Product arroz = new Product(null, "arroz", "vamooo", 75.0, "");
+        Product carne = new Product(null, "carne", "vamooooooooo", 79.0, "");
+
         categoryRepository.saveAll(Arrays.asList(eletronics, foods, computers));
+        productRepository.saveAll(Arrays.asList(sucoDeLaranja, macbook, microfone, arroz, carne));
 
         User trem = new User(null, "trem", "trem@gmail.com", "85997687485", "e7y6ig");
         User tremBala = new User(null, "trem bala", "trembala@gmail.com", "85984393928", "wo8yre");
