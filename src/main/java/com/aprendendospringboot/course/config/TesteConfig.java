@@ -16,6 +16,8 @@ import com.aprendendospringboot.course.repositories.CategoryRepository;
 import com.aprendendospringboot.course.entities.Category;
 import com.aprendendospringboot.course.repositories.ProductRepository;
 import com.aprendendospringboot.course.entities.Product;
+import com.aprendendospringboot.course.entities.OrderItem;
+import com.aprendendospringboot.course.repositories.OrderItemRepository;
 
 @Configuration
 @Profile("test")
@@ -32,6 +34,9 @@ public class TesteConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
 
     public void run(String... args) throws Exception {
 
@@ -65,6 +70,13 @@ public class TesteConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(trem, tremBala));
         orderRepository.saveAll(Arrays.asList(macarrão, computador, notebook));
+
+        OrderItem compras = new OrderItem(macarrão, arroz, 3, arroz.getPrice());
+        OrderItem eletronico = new OrderItem(computador, macbook, 1, macbook.getPrice());
+        OrderItem alimento = new OrderItem(macarrão, carne, 1, carne.getPrice());
+        OrderItem compra = new OrderItem(notebook, microfone, 1, microfone.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(compras, eletronico, alimento, compra));
 
     }
 }

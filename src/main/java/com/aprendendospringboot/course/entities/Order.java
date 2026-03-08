@@ -10,6 +10,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.HashSet;
+import jakarta.persistence.OneToMany;
 
 import com.aprendendospringboot.course.entities.enums.OrderStatus;
 
@@ -29,6 +32,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
 
@@ -73,6 +79,10 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override
