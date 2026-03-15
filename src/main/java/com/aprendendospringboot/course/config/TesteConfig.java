@@ -17,6 +17,7 @@ import com.aprendendospringboot.course.entities.Category;
 import com.aprendendospringboot.course.repositories.ProductRepository;
 import com.aprendendospringboot.course.entities.Product;
 import com.aprendendospringboot.course.entities.OrderItem;
+import com.aprendendospringboot.course.entities.Payment;
 import com.aprendendospringboot.course.repositories.OrderItemRepository;
 
 @Configuration
@@ -78,5 +79,13 @@ public class TesteConfig implements CommandLineRunner {
 
         orderItemRepository.saveAll(Arrays.asList(compras, eletronico, alimento, compra));
 
+        Payment macarrãoPayment = new Payment(null, Instant.parse("2026-02-20T15:30:33Z"), macarrão);
+        Payment computadorPayment = new Payment(null, Instant.parse("2026-02-20T15:30:33Z"), computador);
+        Payment notebookPayment = new Payment(null, Instant.parse("2026-02-20T15:30:33Z"), notebook);
+        macarrão.setPayment(macarrãoPayment);
+        computador.setPayment(computadorPayment);
+        notebook.setPayment(notebookPayment);
+
+        orderRepository.saveAll(Arrays.asList(macarrão, computador, notebook));
     }
 }
