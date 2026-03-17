@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.net.URI;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.aprendendospringboot.course.entities.User;
 import com.aprendendospringboot.course.services.UserService;
@@ -46,5 +47,11 @@ public class UserResource {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
+        obj = service.update(id, obj);
+        return ResponseEntity.ok().body(obj);
     }
 }
